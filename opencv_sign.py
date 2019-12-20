@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from keras.models import load_model
 
-
+#load model
 model = load_model('Load your model')
 
 
@@ -36,16 +36,8 @@ def main():
         blurred_img = cv2.GaussianBlur(cropped_img,(15,15),0)
     
         resized_img = cv2.resize(blurred_img,(32,32),interpolation = cv2.INTER_AREA)
-    # our_image = process_image(resized_img)
-        # filename = 'checkimg.jpg'
-        # my_image = cv2.imwrite(filename,resized_img)
-        
         prediction_prob, predicted_class = predict(model,resized_img)
-        # print(predicted_class,prediction_prob)
-
-        # cv2.imshow("Cropped image", cropped_img)
-        # cv2.imshow("Resized Image",resized_img)
-        # cv2.imshow("Blurred image",blurred_img)
+ 
         cv2.namedWindow('Video',cv2.WINDOW_NORMAL)
         cv2.putText(frame,predicted_class,(x,y-10), 1,2,(255,0,0),2)
         cv2.imshow('Video',frame)
